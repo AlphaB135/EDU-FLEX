@@ -1,0 +1,97 @@
+<header class="header-area">
+  <div class="top-header">
+      <div class="logo">
+          <img src="logo.png" alt="Nest Logo">
+      <!--     <span class="brand-name">EDU-FLEX</span> -->
+          <span class="tagline">New-Age <span1> Learning</span1>,<br><span2> Flexible</span2> for You.</span>
+      </div>
+      <div class="search-bar">
+          <select class="category-dropdown">
+              <option>ประเภทคอสเรียน</option>
+          </select>
+          <input class="category-dropdown" type="text" placeholder="ค้นหาคอส...">
+          <button class="search-btn">
+              <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+      </div>
+      <div class="user-actions">
+          <a href="#" class="compare">
+              <i class="fa-solid fa-shuffle"></i> ติดตามพัสดุ 
+              <span class="badge1">3</span>
+          </a>
+          <a href="#" class="wishlist">
+              <i class="fa-solid fa-heart"></i> Wishlist 
+              <span class="badge1">6</span>
+          </a>
+          <a href="#" class="cart">
+              <i class="fa-solid fa-cart-shopping"></i> ตะกร้า 
+              <span class="badge1">2</span>
+          </a>
+          <a href="#" class="account">
+              <i class="fa-solid fa-user"></i> บัญชี
+          </a>
+      </div>
+  </div>
+
+  <nav class="main-nav">
+
+    
+        <button class="browse-btn" id="dropdown-btn">
+            ประเภทคอร์สเรียน <i class="fa-solid fa-caret-down"></i>
+        </button>
+        <ul class="dropdown-content" id="dropdown-menu">
+            <li onclick="selectCategory('ทั้งหมด')">ทั้งหมด</li>
+            <li onclick="selectCategory('คอร์สเรียนออนไลน์')">คอร์สเรียนออนไลน์</li>
+            <li onclick="selectCategory('หนังสือเรียน')">หนังสือเรียน</li>
+            <li onclick="selectCategory('คอร์ส TCAS')">คอร์ส TCAS</li>
+        </ul>
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+    const dropdownBtn = document.getElementById("dropdown-btn");
+    const dropdownMenu = document.getElementById("dropdown-menu");
+
+    // กดปุ่มแล้วให้แสดง/ซ่อน dropdown
+    dropdownBtn.addEventListener("click", function () {
+        dropdownMenu.classList.toggle("dropdown-active");
+    });
+
+    // คลิกข้างนอก dropdown ให้ซ่อน
+    document.addEventListener("click", function (event) {
+        if (!dropdownBtn.contains(event.target) && !dropdownMenu.contains(event.target)) {
+            dropdownMenu.classList.remove("dropdown-active");
+        }
+    });
+});
+
+// ✅ ฟังก์ชันเลือกประเภทคอร์ส + เปลี่ยนชื่อปุ่ม
+function selectCategory(category) {
+    document.getElementById("dropdown-btn").innerHTML = category + ' <i class="fa-solid fa-caret-down"></i>';
+    document.getElementById("dropdown-menu").classList.remove("dropdown-active"); // ซ่อน dropdown หลังเลือก
+}
+
+    </script>
+
+      <!-- <button class="browse-btn">
+          <i class="fa-solid fa-bars"></i> ประเภทคอส
+      </button>
+ -->
+
+
+
+      <a href="#"><i class="fa-solid fa-fire"></i> Deals</a>
+      <a href="#" class="active"><i class="fa-solid fa-house"></i> Home</a>
+      <a href="#"><i class="fa-solid fa-info-circle"></i> มัธยมต้น</a>
+      <a href="#"><i class="fa-solid fa-store"></i> มัธยมปลาย ⬇</a>
+      <a href="#"><i class="fa-solid fa-users"></i> ป.ตรี ⬇</a>
+   <!--    <a href="#"><i class="fa-solid fa-pen"></i> Blog ⬇</a>
+      <a href="#"><i class="fa-solid fa-file"></i> Pages ⬇</a> -->
+      <a href="#"><i class="fa-solid fa-envelope"></i> ติดต่อเจ้าหน้าที่</a>
+     <!--  <div class="support">
+          <i class="fa-solid fa-headset"></i>
+          <span class="phone-number">1900 - 888</span>
+          <span class="support-text">24/7 Support Center</span>
+      </div> -->
+  </nav>
+</header>

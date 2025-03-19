@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔍 ทดสอบดึงข้อมูลจาก read.php</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>🔍 ทดสอบดึงข้อมูลจาก <code>read.php</code></h1>
+    <div id="test-product-list">⏳ กำลังโหลดข้อมูล...</div>
+
+    <script>
+        fetch("read.php")
+            .then(response => response.json())
+            .then(data => {
+                if (!Array.isArray(data)) {
+                    throw new Error("❌ ไม่ใช่ JSON ที่ถูกต้อง");
+                }
+                let productHTML = "<ul>";
+                data.forEach(item => {
+                    productHTML += `<li><strong>${item.name}</strong> - ฿${item.price}</li>`;
+                });
+                productHTML += "</ul>";
+                document.getElementById("test-product-list").innerHTML = productHTML;
+            })
+            .catch(error => {
+                console.error("❌ Error loading products:", error);
+                document.getElementById("test-product-list").innerHTML = "❌ เกิดข้อผิดพลาดในการโหลดข้อมูล";
+            });
+    </script>
+</body>
+</html>

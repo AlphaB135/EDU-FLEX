@@ -1,0 +1,137 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EDU-FLEX</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./styles.css">
+</head>
+<body class="text-gray-600 font-fa-solid bg-gray-100">
+   
+    <div id="header-placeholder"></div>
+
+    <script>
+        // โหลด header.html เข้าไปใน #header-placeholder
+        fetch("header.html")
+            .then(response => response.text())
+            .then(data => document.getElementById("header-placeholder").innerHTML = data);
+
+        // โหลด footer.html เข้าไปใน #footer-placeholder
+        //fetch("footer.html")
+          //  .then(response => response.text())
+           // .then(data => document.getElementById("footer-placeholder").innerHTML = data);
+    </script>
+    
+    <div class="product-list">
+      <!-- Breadcrumb -->  
+       <!-- รอทำต่อ -->
+     <!--  <nav class="breadcrumb">
+          <a href="#">Home</a> >
+          <a href="#">Vegetables & Tubers</a> >
+          <span>Seeds of Change Organic</span>
+      </nav> -->
+
+      <div class="product-container">
+          <!-- Left: Product Image -->
+          <div class="product-image">
+              <img src="../src/product_display/1.png" alt="image main">
+              <!-- <div class="product-thumbnails">
+                  <img src="thumb1.jpg" alt="image small">
+                  <img src="thumb2.jpg" alt="image small">
+                  <img src="thumb3.jpg" alt="image small">
+                  <img src="thumb4.jpg" alt="image small">
+              </div> -->
+          </div>
+
+          <!-- Right: Product Details -->
+          <div class="product-details">
+              <span class="sale-badge">35% off</span>
+              <h1 class="product-title">หนังสือติวสอบTCAS 67 และ คลิปวิดิโอสอนจากอาจารย์ปิยนาท</h1>
+              <p class="product-reviews">⭐⭐⭐⭐⭐ (1k reviews)</p>
+              
+              <div class="product-price">
+                  <span class="current-price">19,500 บาท</span>
+                  <span class="discount">35% ลด</span>
+                  <span class="old-price">30,000 บาท</span>
+              </div>
+
+              <p class="product-description">
+                  หนังสือติวสอบTCAS 67 กับอาจารย์จากมหาลัยชื่อดัง หร้อมคลิปสอนจากอาจารย์ชื่อดังจากมหาลัยชื่อดัง รับรองสอบได้คะแนนดีแน่นอน
+              </p>
+
+              <!-- <div class="product-options">
+                  <label>Size / Weight:</label>
+                  <button class="size-option">50g</button>
+                  <button class="size-option active">60g</button>
+                  <button class="size-option">80g</button>
+                  <button class="size-option">100g</button>
+                  <button class="size-option">150g</button>
+              </div> -->
+
+              <div class="cart-actions">
+                  <input type="number" value="1" min="1" class="quantity">
+                  <button class="add-to-cart">🛒 Add to cart</button>
+              </div>
+
+              <div class="product-meta">
+                  <p><strong>Type:</strong> Book</p>
+                  <!-- <p><strong>MFG:</strong> Jun 4, 2024</p> -->
+                  <p><strong>LIFE:</strong> 2 Year</p>
+                  <p><strong>SKU:</strong> FWM15VKT</p>
+                  <p><strong>Tags:</strong> คอร์สเรียน, หนังสือ, TCAS, ติวสอบ</p>
+                  <p><strong>Stock:</strong> 9k ในสต๊อก</p>
+              </div>
+          </div>
+      </div>
+  </div>
+  </body>
+</html>
+
+<script>
+  const url_params = new URLSearchParams(window.location.search);
+  const id = url_params.get("id");
+  console.log(id);
+  const requestOptions = {
+    method: "GET",
+    redirect: "follow",
+  };
+
+  fetch(
+    "http://localhost/php_tailwindcss_crud/src/readone.php?id=" + id,
+    requestOptions
+  )
+    .then((response) => response.text())
+    .then((result) => {
+      var jsobObj = JSON.parse(result);
+      console.log(jsobObj);
+      document.getElementById("name").innerText = jsobObj.name;
+      document
+        .getElementById("shoe_image")
+        .setAttribute("src", "product_display/" + jsobObj.image_name);
+      document.getElementById("desc").innerText = jsobObj.desc;
+
+      // Define the formatting options
+      var options = {
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 2,
+        style: "currency",
+        currency: "THB",
+      };
+
+      // Create an instance of the Intl.NumberFormat object
+      var formatter = new Intl.NumberFormat("en-IN", options);
+
+      // Format the number using the format() method
+      var formattedNum = formatter.format(jsobObj.price);
+
+      document.getElementById("price").innerText = formattedNum;
+      document.getElementById("stock").innerText = jsobObj.stock;
+      document.getElementById("size").innerText = jsobObj.size;
+    })
+    .catch((error) => console.error(error));
+</script>

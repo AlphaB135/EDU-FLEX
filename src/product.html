@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>รายละเอียดสินค้า</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    
+    <div class="product-detail" id="product-detail">
+        <!-- รายละเอียดสินค้าจะถูกโหลดตรงนี้ -->
+    </div>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const productType = urlParams.get("type");
+            const productId = urlParams.get("id");
+
+            if (!productType || !productId) {
+                document.getElementById("product-detail").innerHTML = "<p>ไม่พบสินค้าที่คุณเลือก</p>";
+                return;
+            }
+
+            fetch(`readone.php?type=${productType}&id=${productId}`)
+                .then(response => response.json())
+                .then(product => {
+                    if (!product) {
+                        document.getElementById("product-detail").innerHTML = "<p>ไม่พบข้อมูลสินค้า</p>";
+                        return;
+                    }
+
+                    let productHTML = `
+                        <div class="product-container">
+                            <img src="product_display/${product.image}" alt="${product.name}">
+                            <h1>${product.name}</h1>
+                            <p>${product.description}</p>
+                            <p class="price">${product.price} บาท</p>
+                            ${productType === 'course' ? `<p><strong>ผู้สอน:</strong> ${product.instructor}</p>` : `<p><strong>ผู้เขียน:</strong> ${product.author}</p>`}
+                            <button>${productType === 'course' ? 'สมัครเรียน' : 'ซื้อหนังสือ'}</button>
+                        </div>
+                    `;
+                    document.getElementById("product-detail").innerHTML = productHTML;
+                })
+                .catch(error => console.error("Error loading product details:", error));
+        });
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script> 
+</head>
+<body class="bg-gray-100 p-10">
+
+    <div class="container mx-auto">
+        <h2 class="text-2xl font-bold text-center mb-6">สินค้าขายดี</h2>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+           
+            <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+                <img src="https://uloco.gallerycdn.vsassets.io/extensions/uloco/theme-bluloco-dark/3.7.5/1739184250990/Microsoft.VisualStudio.Services.Icons.Default" alt="" class="w-full h-[200px] object-cover">
+                <div class="p-4">
+                    <h2 class="text-lg font-bold">Cloud</h2>
+                    <p class="text-sm text-gray-600 mt-2">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                </div>
+            </div>
+
+            <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+                <img src="https://uloco.gallerycdn.vsassets.io/extensions/uloco/theme-bluloco-dark/3.7.5/1739184250990/Microsoft.VisualStudio.Services.Icons.Default" alt="" class="w-full h-[200px] object-cover">
+                <div class="p-4">
+                    <h2 class="text-lg font-bold">Cloud</h2>
+                    <p class="text-sm text-gray-600 mt-2">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                </div>
+            </div>
+
+            
+            <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+                <img src="https://uloco.gallerycdn.vsassets.io/extensions/uloco/theme-bluloco-dark/3.7.5/1739184250990/Microsoft.VisualStudio.Services.Icons.Default" alt="" class="w-full h-[200px] object-cover">
+                <div class="p-4">
+                    <h2 class="text-lg font-bold">Cloud</h2>
+                    <p class="text-sm text-gray-600 mt-2">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                </div>
+            </div>
+
+            
+            <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+                <img src="https://uloco.gallerycdn.vsassets.io/extensions/uloco/theme-bluloco-dark/3.7.5/1739184250990/Microsoft.VisualStudio.Services.Icons.Default" alt="" class="w-full h-[200px] object-cover">
+                <div class="p-4">
+                    <h2 class="text-lg font-bold">Cloud</h2>
+                    <p class="text-sm text-gray-600 mt-2">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                </div>
+            </div>
+
+           
+            <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+                <img src="https://uloco.gallerycdn.vsassets.io/extensions/uloco/theme-bluloco-dark/3.7.5/1739184250990/Microsoft.VisualStudio.Services.Icons.Default" alt="" class="w-full h-[200px] object-cover">
+                <div class="p-4">
+                    <h2 class="text-lg font-bold">Cloud</h2>
+                    <p class="text-sm text-gray-600 mt-2">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
+ -->

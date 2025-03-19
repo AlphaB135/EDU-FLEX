@@ -1,0 +1,522 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EDU-FLEX</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./styles.css">
+</head>
+<body class="text-gray-600 font-fa-solid bg-gray-100">
+   
+    <div id="header-placeholder"></div>
+
+    <script>
+        // โหลด header.html เข้าไปใน #header-placeholder
+        fetch("header.html")
+            .then(response => response.text())
+            .then(data => document.getElementById("header-placeholder").innerHTML = data);
+
+        // โหลด footer.html เข้าไปใน #footer-placeholder
+    </script>
+
+    <!-- banner -->
+    <div class="banner">
+        <button class="arrow left" onclick="prevSlide()">&#10094;</button>
+        <div class="banner-wrapper" id="banner">
+            <img class="banner-img" src="../src/product_display/welcome1.png" alt="Banner 1">
+            <img class="banner-img" src="../src/product_display/banner1.png" alt="Banner 2">
+            <img class="banner-img" src="../src/product_display/PROMOTION2.png" alt="Banner 2">
+            <img class="banner-img" src="../src/product_display/banner2.png" alt="Banner 3">
+        </div>
+        <button class="arrow right" onclick="nextSlide()">&#10095;</button>
+    </div>
+    
+
+
+    <!-- เลื่อน banner -->
+    <script>
+        let currentSlide = 0;
+const slides = document.querySelectorAll(".banner-img");
+const totalSlides = slides.length;
+const bannerWrapper = document.getElementById("banner");
+
+function updateSlide() {
+    bannerWrapper.style.transform = `translateX(-${currentSlide * 100}%)`;
+}
+
+
+function nextSlide() {
+    currentSlide = (currentSlide + 1) % totalSlides;
+    updateSlide();
+}
+
+
+function prevSlide() {
+    currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+    updateSlide();
+}
+
+// ✅ ตั้งให้เลื่อนอัตโนมัติทุก 3 วินาที
+setInterval(nextSlide, 3000);
+
+    </script>
+
+
+
+
+
+  <script src="script.js"></script>
+  
+  <!-- คอสเรียน -->
+  <!-- <div class="container">
+    <h2>คอร์สเรียนและหนังสือแนะนำ</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6" id="product-list"></div>
+</div> -->
+
+
+<!-- โหลดคอร์สเรียนและหนังสือจากฐานข้อมูล -->
+<!-- <script>
+    
+    fetch("read.php")
+    .then(response => response.json())
+    .then(data => {
+        console.log("Data received:", data); // เช็คข้อมูลที่โหลดมา
+        const productList = document.getElementById("product-list");
+        productList.innerHTML = "";
+
+        data.forEach(item => {
+            const productHTML = `
+                <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+                    <img src="product_display/${item.image}" alt="${item.name}" class="w-full h-[200px] object-cover">
+                    <div class="p-4">
+                        <h2 class="text-lg font-bold">${item.name}</h2>
+                        <p class="text-sm text-gray-600 mt-2">${item.description.substring(0, 100)}...</p>
+                        <p class="font-bold text-green-600">฿${item.price}</p>
+                        <a href="product.html?type=${item.type}&id=${item.id}" class="mt-2 inline-block bg-blue-500 text-white px-4 py-2 rounded">ดูรายละเอียด</a>
+                    </div>
+                </div>
+            `;
+            productList.innerHTML += productHTML;
+        });
+    })
+    .catch(error => console.error("Error loading products:", error));
+
+</script>
+ -->
+
+
+
+
+ <div class="container">
+    <h2 class="titlecourse">คอร์สเรียนวิชาต่าง ๆ</h2>
+
+    <!-- ปุ่มเลื่อนซ้าย -->
+    <button class="carousel-btn left-btn" onclick="scrollCarousel(-200)">&#10094;</button>
+
+    <div class="carousel-wrapper">
+        <div class="categories" id="carousel">
+            <div class="course-peach" style="background-color: #e6f7ff;">
+                <img src="https://www.beyondstudycenter.com/wp-content/uploads/2018/10/Type-of-English.jpg" alt="Peach">
+                <h3>ภาษาอังกฤษ</h3>
+                <p>14 items</p>
+            </div>
+            <div class="course-snack" style="background-color: #f9f0ff;">
+                <img src="https://i0.wp.com/www.webythebrain.com/wp-content/uploads/2021/03/med-course-41.jpg" alt="Math">
+                <h3>คณิตศาสตร์</h3>
+                <p>56 items</p>
+            </div>
+            <div class="course-vegetables" style="background-color: #e6fffb;">
+                <img src="https://www.physicsfarm.org/wp-content/uploads/2021/11/Physics-Slayer-True-Cover-1024x683.png" alt="Vegetables">
+                <h3>ฟิสิกส์</h3>
+                <p>72 items</p>
+            </div>
+            <div class="course-strawberry" style="background-color: #fff7e6;">
+                <img src="https://shoponline.ondemand.in.th/media/iopt/catalog/product/cache/2f250b7155a8d4468e3813dd48492fac/3/2/3211__1_1.jpg" alt="Strawberry">
+                <h3>เคมี</h3>
+                <p>36 items</p>
+            </div>
+            <div class="course-black-plum" style="background-color: #fff0f6;">
+                <img src="https://shoponline.ondemand.in.th/media/iopt/catalog/product/cache/2f250b7155a8d4468e3813dd48492fac/b/i/biology_2201.jpg" alt="bio"> 
+                <h3>ชีววิทยา</h3> 
+                <p>123 items</p>
+            </div>
+            <div class="course-black-plum" style="background-color: #67f0724d;">
+                <img src="https://learndi.aisacademy.com/media/course/2023/04/4fe18b89-020.jpg" alt="bio"> 
+                <h3>ภาษาไทย</h3> 
+                <p>53 items</p>
+            </div>
+            <div class="course-black-plum" style="background-color: #bdd87d31;">
+                <img src="https://learndi.aisacademy.com/media/course/2021/11/a20bed64-add.jpg" alt="bio"> 
+                <h3>สังคมศึกษา</h3> 
+                <p>56 items</p>
+            </div>
+            <div class="course-black-plum" style="background-color: #7ac4d652;">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpanlB_rP7MPt_IxMCKDXbEygX3e6t09PydQ&s" alt="bio"> 
+                <h3>ดาราศาสตร์</h3> 
+                <p>12 items</p>
+            </div>
+            <div class="course-black-plum" style="background-color: #db5d8f3d;">
+                <img src="https://api.chulabook.com/images/pid-205065.jpg" alt="bio"> 
+                <h3>วิชาเฉพาะ</h3> 
+                <p>85 items</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ปุ่มเลื่อนขวา -->
+    <button class="carousel-btn right-btn" onclick="scrollCarousel(200)">&#10095;</button>
+</div>
+
+
+<script>
+  function scrollCarousel(amount) {
+    const carousel = document.getElementById("carousel");
+
+    // ตรวจสอบว่าตอนนี้มีการเลื่อนอยู่หรือไม่
+    if (!carousel) return;
+
+    // ใช้ requestAnimationFrame เพื่อให้ Smooth สุด ๆ
+    let start = null;
+    const duration = 500; // เวลาในการเลื่อน (มิลลิวินาที)
+    const initialPosition = carousel.scrollLeft;
+    const targetPosition = initialPosition + amount;
+
+    function animationStep(timestamp) {
+        if (!start) start = timestamp;
+        const progress = timestamp - start;
+        const easeInOutQuad = progress / duration * (2 - progress / duration);
+        carousel.scrollLeft = initialPosition + (targetPosition - initialPosition) * easeInOutQuad;
+
+        if (progress < duration) {
+            requestAnimationFrame(animationStep);
+        } else {
+            carousel.scrollLeft = targetPosition;
+        }
+    }
+
+    requestAnimationFrame(animationStep);
+}
+
+</script>
+
+
+
+<!-- populacouse -->
+<h2 class="poppula-couse-title">คอร์สเรียน ยอดนิยม</h2>
+<div class="poppula-couse" id="poppula-couse">
+    <!-- คอร์สเรียนจากฐานข้อมูลจะถูกแทรกที่นี่ -->
+</div>
+
+<script>
+    // โหลดข้อมูลจาก read.php
+    fetch("read.php?popular=true") // ✅ ดึงเฉพาะคอร์สยอดนิยม
+        .then(response => response.json())
+        .then(data => {
+            const container = document.getElementById("poppula-couse");
+            container.innerHTML = ""; // เคลียร์ข้อมูลเก่า
+
+            if (data.length === 0) {
+                container.innerHTML = "<p>❌ ไม่มีคอร์สยอดนิยมในขณะนี้</p>";
+                return;
+            }
+
+            data.forEach((item, index) => {
+                // ✅ กำหนด Tag ตามประเภทคอร์ส
+                let tagClass = item.type === "course" ? "hot" : (item.type === "book" ? "new" : "sale");
+                let tagText = item.type === "course" ? "Hot" : (item.type === "book" ? "New" : "Sale");
+
+                // ✅ ตรวจสอบว่ารูปภาพมีค่าหรือไม่
+                let imageUrl = item.image ? `product_display/${item.image}` : "/PHP_TailwindCSS_CRUD/images/default.jpg";
+
+                const productHTML = `
+                    <div class="product-card">
+                        <span class="tag ${tagClass}">${tagText}</span>
+                        <img src="${imageUrl}" alt="${item.name}">
+                        <h4>${item.name}</h4>
+                        <p class="price">฿${item.price} <span class="old-price">฿${(item.price * 1.2).toFixed(2)}</span></p>
+                        <a href="shoe.html" class="add-btn">ดูรายละเอียด</a>
+                    </div>
+                `;
+                container.innerHTML += productHTML;
+            });
+        })
+        .catch(error => {
+            console.error("❌ Error loading products:", error);
+            document.getElementById("poppula-couse").innerHTML = "<p>❌ ไม่สามารถโหลดข้อมูลสินค้าได้</p>";
+        });
+</script>
+
+
+
+
+
+<!-- <h2 class="poppula-couse-title">คอร์สเรียน ยอดนิยม</h2>
+
+    <div class="poppula-couse">
+        <div class="product-card">
+            <span class="tag hot">Hot</span>
+            <img src="/PHP_TailwindCSS_CRUD/images/3.jpg" alt="Product 1">
+            <h4>รวมวิชาที่ต้องใช้สอบเข้า ม.ปลาย</h4>
+            <p class="price">$28.85 <span class="old-price">$32.8</span></p>
+            <button class="add-btn">Add</button>
+        </div>
+        <div class="product-card">
+            <span class="tag hot">Hot</span>
+            <img src="/PHP_TailwindCSS_CRUD/images/2.jpg" alt="Product 1">
+            <h4>รวมวิชาพื้นฐานที่ต้องใช้ ม.ปลาย</h4>
+            <p class="price">$28.85 <span class="old-price">$32.8</span></p>
+            <button class="add-btn">Add</button>
+        </div>
+        <div class="product-card">
+            <span class="tag hot">Hot</span>
+            <img src="/PHP_TailwindCSS_CRUD/images/1.jpg" alt="Product 1">
+            <h4>คอร์สเรียนพร้อมลุย T-GAT</h4>
+            <p class="price">$28.85 <span class="old-price">$32.8</span></p>
+            <button class="add-btn">Add</button>
+        </div>
+        <div class="product-card">
+            <span class="tag sale">Sale</span>
+            <img src="/PHP_TailwindCSS_CRUD/images/6.jpg" alt="Product 2">
+            <h4>คอร์สเรียนพร้อมลุย ฟิสิกส์ A-Level</h4>
+            <p class="price">$52.85 <span class="old-price">$55.8</span></p>
+            <button class="add-btn">Add</button>
+        </div>
+        <div class="product-card">
+            <span class="tag new">New</span>
+            <img src="/PHP_TailwindCSS_CRUD/images/7.jpg" alt="Product 3">
+            <h4>คอร์สเรียนพร้อมลุย เคมี A-Level</h4>
+            <p class="price">$48.85 <span class="old-price">$52.8</span></p>
+            <button class="add-btn">Add</button>
+        </div>
+        <div class="product-card">
+            <span class="tag new">New</span>
+            <img src="/PHP_TailwindCSS_CRUD/images/5.jpg" alt="Product 3">
+            <h4>คอร์สเรียนพร้อมลุย ชีววิทยา A-Level</h4>
+            <p class="price">$48.85 <span class="old-price">$52.8</span></p>
+            <button class="add-btn">Add</button>
+        </div>
+        <div class="product-card">
+            <span class="tag new">New</span>
+            <img src="/PHP_TailwindCSS_CRUD/images/4.jpg" alt="Product 3">
+            <h4>คอร์สเรียนตะลุย NETSAT</h4>
+            <p class="price">$48.85 <span class="old-price">$52.8</span></p>
+            <button class="add-btn">Add</button>
+        </div>
+    </div> -->
+
+
+
+    <!-- ขายดี -->
+
+    <section class="Daily-Best-Sells">
+        <h2>Daily Best Sells</h2>
+        <div class="best-sells-container" id="best-sells-container">
+            <!-- คอร์สขายดีจะแสดงที่นี่ -->
+        </div>
+    </section>
+    
+    <script>
+        fetch("read.php")  // ✅ ใช้ read.php ดึงข้อมูลคอร์สขายดี
+            .then(response => response.json())
+            .then(data => {
+                const container = document.getElementById("best-sells-container");
+                container.innerHTML = ""; // เคลียร์ข้อมูลเดิมก่อน
+    
+                if (data.error) {
+                    container.innerHTML = `<p>❌ เกิดข้อผิดพลาด: ${data.error}</p>`;
+                    return;
+                }
+    
+                data.forEach((item, index) => {
+                    let badgeClass = index % 2 === 0 ? "red" : "blue";
+                    let badgeText = index % 2 === 0 ? "Save 15%" : "Sale";
+                    let imageUrl = item.image ? `product_display/${item.image}` : "/PHP_TailwindCSS_CRUD/images/default.jpg";
+    
+                    const productHTML = `
+                        <div class="product-card save">
+                            <span class="badge ${badgeClass}">${badgeText}</span>
+                            <img src="${imageUrl}" alt="${item.name}">
+                            <p class="brand">${item.instructor}</p>
+                            <h3>${item.name}</h3>
+                            <p class="price">฿${item.price} <span class="old-price">฿${(item.price * 1.2).toFixed(2)}</span></p>
+                            <button class="cart-btn">🛒 Add To Cart</button>
+                        </div>
+                    `;
+                    container.innerHTML += productHTML;
+                });
+            })
+            .catch(error => {
+                console.error("❌ Error loading products:", error);
+                document.getElementById("best-sells-container").innerHTML = "<p>❌ ไม่สามารถโหลดข้อมูลสินค้าได้</p>";
+            });
+    </script>
+
+   <!--  <section class="Daily-Best-Sells">
+      <h2>Daily Best Sells</h2>
+
+      <div class="best-sells-container">
+          <div class="promo-box">
+              <h3>Bring nature into your home</h3>
+              <button class="shop-btn">Shop Now</button>
+          </div>
+
+          <div class="product-card sale">
+              <span class="badge blue">Sale</span>
+              <img src="product1.jpg" alt="Product 1">
+              <p class="brand">Hodo Foods</p>
+              <h3>Angie’s Boomchickapop Sweet and Wommies</h3>
+              <p class="price">$238.85 <span class="old-price">$245.8</span></p>
+              <p>Sold: 90/120</p>
+              <button class="cart-btn">🛒 Add To Cart</button>
+          </div>
+
+          <div class="product-card best-sale">
+              <span class="badge orange">Best sale</span>
+              <img src="product2.jpg" alt="Product 2">
+              <p class="brand">Hodo Foods</p>
+              <h3>Foster Farms Takeout Crispy Classic</h3>
+              <p class="price">$238.85 <span class="old-price">$245.8</span></p>
+              <p>Sold: 90/120</p>
+              <button class="cart-btn">🛒 Add To Cart</button>
+          </div>
+
+          <div class="product-card save">
+              <span class="badge red">Save 15%</span>
+              <img src="product3.jpg" alt="Product 3">
+              <p class="brand">Hodo Foods</p>
+              <h3>Blue Diamond Almonds Lightly Salted</h3>
+              <p class="price">$238.85 <span class="old-price">$245.8</span></p>
+              <p>Sold: 90/120</p>
+              <button class="cart-btn">🛒 Add To Cart</button>
+          </div>
+
+          <div class="product-card save">
+              <span class="badge red">Save 15%</span>
+              <img src="product4.jpg" alt="Product 4">
+              <p class="brand">Hodo Foods</p>
+              <h3>Seeds of Change Organic Quinoa, Brown</h3>
+              <p class="price">$238.85 <span class="old-price">$245.8</span></p>
+              <p>Sold: 90/120</p>
+              <button class="cart-btn">🛒 Add To Cart</button>
+          </div>
+      </div>
+  </section> -->
+
+
+
+  <!-- toprate -->
+
+
+  <div class="top-rated-container">
+    <div class="top-rated-title">Top Rated</div>
+    <div class="top-rated-list">
+        <div class="top-rated-item">
+            <img src="https://media.allonline.7eleven.co.th/pdmain/676463_00.jpg" alt="Pomegranate">
+            <div class="top-rated-info">
+                <div class="top-rated-name">คณิตศาสตร์</div>
+                <div class="top-rated-price">32.85 <span class="top-rated-old-price">33.8</span></div>
+            </div>
+        </div>
+
+        <div class="top-rated-item">
+            <img src="https://media.allonline.7eleven.co.th/pdmain/676463_00.jpg" alt="Avocado">
+            <div class="top-rated-info">
+                <div class="top-rated-name">คณิตศาสตร์</div>
+                <div class="top-rated-price">$32.85 <span class="top-rated-old-price">$33.8</span></div>
+            </div>
+        </div>
+
+        <div class="top-rated-item">
+            <img src="https://media.allonline.7eleven.co.th/pdmain/676463_00.jpg" alt="Orange">
+            <div class="top-rated-info">
+                <div class="top-rated-name">คณิตศาสตร์</div>
+                <div class="top-rated-price">32.85 <span class="top-rated-old-price">33.8</span></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<!--   <div class="banner">
+    <div class="text-content">
+        <h1>Fresh Vegetables <br> Big Discount</h1>
+        <p>Save up to 50% off on your first order</p>
+        <div class="subscribe-box">
+            <input type="email" placeholder="Your email address">
+            <button>Subscribe</button>
+        </div>
+    </div>
+    <div class="image-content">
+        <img src="image.png" alt="Fresh Vegetables">
+    </div>
+</div> -->
+
+
+    <script src="index.js"></script>
+    <div id="wellcom-placeholder"></div>
+    <script>fetch("wellcom.html")
+        .then(response => response.text())
+        .then(data => document.getElementById("wellcom-placeholder").innerHTML = data);</script>
+    <div id="footer-placeholder"></div>
+    <script>
+        fetch("footer.html")
+            .then(response => response.text())
+            .then(data => document.getElementById("footer-placeholder").innerHTML = data);
+        
+        
+    </script>
+  </body>
+</html>
+
+<script>
+  var cards = document.getElementById("cards");
+  const requestOptions = {
+    method: "GET",
+    redirect: "follow",
+  };
+
+  fetch("http://localhost/php_tailwindcss_crud/src/read.php", requestOptions)
+    .then((response) => response.text())
+    .then((result) => {
+      cards.innerHTML = "";
+      var jsonObj = JSON.parse(result);
+      for (let shoe of jsonObj) {
+        const card =
+          `<div class="rounded-2xl p-4 bg-white border-gray-200 shadow-lg overflow-hidden relative text-center">
+            <img
+              class="max-h-48 w-1/2 object-cover mx-auto"
+              src="product_display/` +
+          shoe.image_name +
+          `" alt=` +
+          shoe.name +
+          `/>
+            <h3 class="text-xl font-bold text-center p-3">` +
+          shoe.name +
+          `</h3>
+            <p class="text-center p-2 text-xs text-truncate">` +
+          shoe.desc +
+          `...</p>
+            <a
+              href="shoe.html?id=` +
+          shoe.id +
+          `"
+              class="text-sm text-center py-2 px-4 rounded-lg btn bg-blue-500 text-white hover:bg-yellow-400 hover:text-white"
+              >See More</a
+            >
+          </div>`;
+        console.log(shoe);
+        cards.insertAdjacentHTML("beforeend", card);
+      }
+    })
+    .catch((error) => console.error(error));
+</script>
+
